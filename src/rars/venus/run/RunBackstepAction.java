@@ -1,10 +1,7 @@
 package rars.venus.run;
 
 import rars.Globals;
-import rars.riscv.hardware.ControlAndStatusRegisterFile;
-import rars.riscv.hardware.FloatingPointRegisterFile;
-import rars.riscv.hardware.Memory;
-import rars.riscv.hardware.RegisterFile;
+import rars.riscv.hardware.*;
 import rars.venus.ExecutePane;
 import rars.venus.FileStatus;
 import rars.venus.GuiAction;
@@ -77,11 +74,13 @@ public class RunBackstepAction extends GuiAction {
             RegisterFile.addRegistersObserver(executePane.getRegistersWindow());
             ControlAndStatusRegisterFile.addRegistersObserver(executePane.getControlAndStatusWindow());
             FloatingPointRegisterFile.addRegistersObserver(executePane.getFloatingPointWindow());
+            PositRegisterFile.addRegistersObserver(executePane.getPositWindow());
             Globals.program.getBackStepper().backStep();
             Memory.getInstance().deleteObserver(executePane.getDataSegmentWindow());
             RegisterFile.deleteRegistersObserver(executePane.getRegistersWindow());
             executePane.getRegistersWindow().updateRegisters();
             executePane.getFloatingPointWindow().updateRegisters();
+            executePane.getPositWindow().updateRegisters();
             executePane.getControlAndStatusWindow().updateRegisters();
             executePane.getDataSegmentWindow().updateValues();
             executePane.getTextSegmentWindow().highlightStepAtPC(); // Argument aded 25 June 2007

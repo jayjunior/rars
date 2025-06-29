@@ -1,5 +1,6 @@
 package rars.riscv.instructions;
 
+import rars.Globals;
 import rars.ProgramStatement;
 import rars.SimulationException;
 import rars.riscv.hardware.ControlAndStatusRegisterFile;
@@ -43,12 +44,20 @@ public class CSRRW extends BasicInstruction {
         int[] operands = statement.getOperands();
         try {
             long csr = ControlAndStatusRegisterFile.getValueLong(operands[1]);
+            long newValue = RegisterFile.getValueLong(operands[2]);
+            if(operands[1] == 80 && (newValue < 0 || newValue > 5)){
+                throw new SimulationException(statement,"exponent size for pcsr can neither be negative nor greater than 5",SimulationException.ILLEGAL_INSTRUCTION);
+            }
             if(ControlAndStatusRegisterFile.updateRegister(operands[1], RegisterFile.getValueLong(operands[2]))){
                 throw new SimulationException(statement, "Attempt to write to read-only CSR", SimulationException.ILLEGAL_INSTRUCTION);
             }
             RegisterFile.updateRegister(operands[0], csr);
         } catch (NullPointerException e) {
             throw new SimulationException(statement, "Attempt to access unavailable CSR", SimulationException.ILLEGAL_INSTRUCTION);
+        }
+        if(operands[1] == 80){
+            int csr = (int) ControlAndStatusRegisterFile.getValueLong(operands[1]);
+            Globals.setPositEs(csr);
         }
     }
 }

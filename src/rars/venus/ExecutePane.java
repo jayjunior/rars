@@ -4,6 +4,7 @@ import rars.Globals;
 import rars.Settings;
 import rars.venus.registers.ControlAndStatusWindow;
 import rars.venus.registers.FloatingPointWindow;
+import rars.venus.registers.PositWindow;
 import rars.venus.registers.RegistersWindow;
 
 import javax.swing.*;
@@ -46,6 +47,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 public class ExecutePane extends JDesktopPane {
     private RegistersWindow registerValues;
     private FloatingPointWindow fpRegValues;
+    private PositWindow positRegValues;
     private ControlAndStatusWindow csrValues;
     private DataSegmentWindow dataSegment;
     private TextSegmentWindow textSegment;
@@ -64,7 +66,7 @@ public class ExecutePane extends JDesktopPane {
      * @param csrRegs window containing the CSR set
      */
 
-    public ExecutePane(VenusUI mainUI, RegistersWindow regs, FloatingPointWindow fpRegs, ControlAndStatusWindow csrRegs) {
+    public ExecutePane(VenusUI mainUI, RegistersWindow regs, FloatingPointWindow fpRegs, ControlAndStatusWindow csrRegs, PositWindow positRegs) {
         this.mainUI = mainUI;
         // Although these are displayed in Data Segment, they apply to all three internal
         // windows within the Execute pane.  So they will be housed here.
@@ -78,6 +80,7 @@ public class ExecutePane extends JDesktopPane {
         registerValues = regs;
         fpRegValues = fpRegs;
         csrValues = csrRegs;
+        positRegValues = positRegs;
         textSegment = new TextSegmentWindow();
         dataSegment = new DataSegmentWindow(choosers);
         labelValues = new LabelsWindow();
@@ -197,6 +200,12 @@ public class ExecutePane extends JDesktopPane {
     public FloatingPointWindow getFloatingPointWindow() {
         return fpRegValues;
     }
+    /**
+     * Access the posit values window.
+     */
+    public PositWindow getPositWindow() {
+        return positRegValues;
+    }
 
     /**
      * Access the Control and Status values window.
@@ -255,6 +264,7 @@ public class ExecutePane extends JDesktopPane {
             // Have all internal windows update their value columns
             registerValues.updateRegisters();
             fpRegValues.updateRegisters();
+            positRegValues.updateRegisters();
             csrValues.updateRegisters();
             dataSegment.updateValues();
             textSegment.updateBasicStatements();

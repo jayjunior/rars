@@ -4,6 +4,7 @@ import rars.ErrorList;
 import rars.ErrorMessage;
 import rars.RISCVprogram;
 import rars.riscv.hardware.FloatingPointRegisterFile;
+import rars.riscv.hardware.PositRegisterFile;
 import rars.riscv.hardware.RegisterFile;
 
 import java.util.ArrayList;
@@ -225,8 +226,9 @@ public class Macro {
             // from ControlAndStatusRegisterFile or FloatingPointRegisterFile register sets.  Expanded the condition.
             // DPS  7-July-2014.
             if (tokenValue.length() > 0 && tokenValue.charAt(0) == '$' &&
-                    RegisterFile.getRegister(tokenValue) == null &&
-                    FloatingPointRegisterFile.getRegister(tokenValue) == null)    // added 7-July-2014
+                    RegisterFile.getRegister(tokenValue) == null && // added 7-July-2014
+                    FloatingPointRegisterFile.getRegister(tokenValue) == null &&
+                    PositRegisterFile.getRegister(tokenValue) == null)
             {
                 return true;
             }

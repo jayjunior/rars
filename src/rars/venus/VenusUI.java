@@ -5,10 +5,7 @@ import rars.Settings;
 import rars.riscv.InstructionSet;
 import rars.riscv.dump.DumpFormatLoader;
 import rars.simulator.Simulator;
-import rars.venus.registers.ControlAndStatusWindow;
-import rars.venus.registers.FloatingPointWindow;
-import rars.venus.registers.RegistersPane;
-import rars.venus.registers.RegistersWindow;
+import rars.venus.registers.*;
 import rars.venus.run.*;
 import rars.venus.settings.*;
 
@@ -65,6 +62,7 @@ public class VenusUI extends JFrame {
     private RegistersPane registersPane;
     private RegistersWindow registersTab;
     private FloatingPointWindow fpTab;
+    private PositWindow positTab;
     private ControlAndStatusWindow csrTab;
     private MessagesPane messagesPane;
     private JSplitPane splitter, horizonSplitter;
@@ -171,13 +169,14 @@ public class VenusUI extends JFrame {
 
         registersTab = new RegistersWindow();
         fpTab = new FloatingPointWindow();
+        positTab = new PositWindow();
         csrTab = new ControlAndStatusWindow();
-        registersPane = new RegistersPane(mainUI, registersTab, fpTab, csrTab);
+        registersPane = new RegistersPane(mainUI, registersTab, fpTab, csrTab,positTab);
         registersPane.setPreferredSize(registersPanePreferredSize);
 
         //Insets defaultTabInsets = (Insets)UIManager.get("TabbedPane.tabInsets");
         //UIManager.put("TabbedPane.tabInsets", new Insets(1, 1, 1, 1));
-        mainPane = new MainPane(mainUI, editor, registersTab, fpTab, csrTab);
+        mainPane = new MainPane(mainUI, editor, registersTab, fpTab, csrTab, positTab);
         //UIManager.put("TabbedPane.tabInsets", defaultTabInsets);
 
   

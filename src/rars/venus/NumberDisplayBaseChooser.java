@@ -292,6 +292,14 @@ public class NumberDisplayBaseChooser extends JCheckBox {
         }
     }
 
+    public static String formatPositNumber(int value , int base){
+        if(base == NumberDisplayBaseChooser.HEXADECIMAL){
+            return Binary.intToHexString(value);
+        }else{
+            return Float.toString(Globals.positInstance.convertToPosit(value));
+        }
+    }
+
 
     /**
      * Set the menu item from Settings menu that corresponds to this chooser.

@@ -579,6 +579,7 @@ public class Simulator extends Observable {
                 Globals.getGui().getMainPane().getExecutePane().getRegistersWindow().updateRegisters();
             } else {
                 Globals.getGui().getMainPane().getExecutePane().getFloatingPointWindow().updateRegisters();
+                Globals.getGui().getMainPane().getExecutePane().getPositWindow().updateRegisters();
             }
             Globals.getGui().getMainPane().getExecutePane().getDataSegmentWindow().updateValues();
             Globals.getGui().getMainPane().getExecutePane().getTextSegmentWindow().setCodeHighlighting(true);

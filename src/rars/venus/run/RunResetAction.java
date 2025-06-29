@@ -81,11 +81,14 @@ public class RunResetAction extends GuiAction {
 
         RegisterFile.resetRegisters();
         FloatingPointRegisterFile.resetRegisters();
+        PositRegisterFile.resetRegisters();
         ControlAndStatusRegisterFile.resetRegisters();
         InterruptController.reset();
 
         executePane.getRegistersWindow().clearHighlighting();
         executePane.getRegistersWindow().updateRegisters();
+        executePane.getPositWindow().clearHighlighting();
+        executePane.getPositWindow().updateRegisters();
         executePane.getFloatingPointWindow().clearHighlighting();
         executePane.getFloatingPointWindow().updateRegisters();
         executePane.getControlAndStatusWindow().clearHighlighting();

@@ -122,6 +122,7 @@ public class RunAssembleAction extends GuiAction {
 
                 RegisterFile.resetRegisters();
                 FloatingPointRegisterFile.resetRegisters();
+                PositRegisterFile.resetRegisters();
                 ControlAndStatusRegisterFile.resetRegisters();
                 InterruptController.reset();
 
@@ -134,6 +135,7 @@ public class RunAssembleAction extends GuiAction {
                 executePane.getTextSegmentWindow().highlightStepAtPC();
                 registersPane.getRegistersWindow().clearWindow();
                 registersPane.getFloatingPointWindow().clearWindow();
+                registersPane.getPositWindow().clearWindow();
                 registersPane.getControlAndStatusWindow().clearWindow();
                 mainUI.setReset(true);
                 mainUI.setStarted(false);

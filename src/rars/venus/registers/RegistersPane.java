@@ -44,6 +44,7 @@ public class RegistersPane extends JTabbedPane {
     private RegistersWindow regsTab;
     private FloatingPointWindow fpTab;
     private ControlAndStatusWindow csrTab;
+    private PositWindow positTab;
 
     private VenusUI mainUI;
 
@@ -52,25 +53,29 @@ public class RegistersPane extends JTabbedPane {
      **/
 
     public RegistersPane(VenusUI appFrame, RegistersWindow regs, FloatingPointWindow cop1,
-                         ControlAndStatusWindow cop0) {
+                         ControlAndStatusWindow cop0,PositWindow cop2) {
         super();
         this.mainUI = appFrame;
 
         regsTab = regs;
         fpTab = cop1;
         csrTab = cop0;
+        positTab = cop2;
         regsTab.setVisible(true);
         fpTab.setVisible(true);
         csrTab.setVisible(true);
+        positTab.setVisible(true);
 
         this.addTab("Registers", regsTab);
         this.addTab("Floating Point", fpTab);
         this.addTab("Control and Status", csrTab);
+        this.addTab("Posit", positTab);
         this.setForeground(Color.black);
 
         this.setToolTipTextAt(0, "CPU registers");
         this.setToolTipTextAt(1, "Floating point unit registers");
         this.setToolTipTextAt(2, "Control and Status registers");
+        this.setToolTipTextAt(3, "Posit registers");
     }
 
     /**
@@ -98,5 +103,9 @@ public class RegistersPane extends JTabbedPane {
      */
     public ControlAndStatusWindow getControlAndStatusWindow() {
         return csrTab;
+    }
+
+    public PositWindow getPositWindow() {
+        return positTab;
     }
 }

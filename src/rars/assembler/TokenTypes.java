@@ -1,10 +1,7 @@
 package rars.assembler;
 
 import rars.Globals;
-import rars.riscv.hardware.ControlAndStatusRegisterFile;
-import rars.riscv.hardware.FloatingPointRegisterFile;
-import rars.riscv.hardware.Register;
-import rars.riscv.hardware.RegisterFile;
+import rars.riscv.hardware.*;
 import rars.util.Binary;
 
 	/*
@@ -50,7 +47,7 @@ public enum TokenTypes {
      * of basic assembler.
      **/
     // TODO: merge REGISTER_NUMBER and REGISTER_NAME
-    REGISTER_NAME, REGISTER_NUMBER, FP_REGISTER_NAME, CSR_NAME, ROUNDING_MODE,
+    REGISTER_NAME, REGISTER_NUMBER, FP_REGISTER_NAME, CSR_NAME, ROUNDING_MODE,P_REGISTER_NAME,
     IDENTIFIER, LEFT_PAREN, RIGHT_PAREN,
     INTEGER_5, INTEGER_6, INTEGER_12, INTEGER_12U, INTEGER_20, INTEGER_32, INTEGER_64, REAL_NUMBER,
     QUOTED_STRING,
@@ -133,6 +130,10 @@ public enum TokenTypes {
         reg = FloatingPointRegisterFile.getRegister(value);
         if (reg != null)
             return TokenTypes.FP_REGISTER_NAME;
+
+        reg = PositRegisterFile.getRegister(value);
+        if (reg != null)
+            return TokenTypes.P_REGISTER_NAME;
 
         // Little bit of a hack because CSRFile doesn't supoprt getRegister(strinug)
         Register[] regs = ControlAndStatusRegisterFile.getRegisters();

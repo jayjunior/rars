@@ -14,6 +14,7 @@ import rars.Settings;
 import rars.assembler.Directives;
 import rars.riscv.BasicInstruction;
 import rars.riscv.hardware.FloatingPointRegisterFile;
+import rars.riscv.hardware.PositRegisterFile;
 import rars.riscv.hardware.Register;
 import rars.riscv.hardware.RegisterFile;
 import rars.riscv.Instruction;
@@ -446,6 +447,10 @@ public class RISCVTokenMarker extends TokenMarker {
             for (Register r : FloatingPointRegisterFile.getRegisters()) {
                 cKeywords.add(r.getName(), Token.KEYWORD3);
                 cKeywords.add("f" + r.getNumber(), Token.KEYWORD3);
+            }
+            for (Register r : PositRegisterFile.getRegisters()) {
+                cKeywords.add(r.getName(), Token.KEYWORD3);
+                cKeywords.add("p" + r.getNumber(), Token.KEYWORD3);
             }
         }
         return cKeywords;

@@ -99,6 +99,7 @@ public class RunStepAction extends GuiAction {
     public void stepped(boolean done, Simulator.Reason reason, SimulationException pe) {
         executePane.getRegistersWindow().updateRegisters();
         executePane.getFloatingPointWindow().updateRegisters();
+        executePane.getPositWindow().updateRegisters();
         executePane.getControlAndStatusWindow().updateRegisters();
         executePane.getDataSegmentWindow().updateValues();
         if (!done) {

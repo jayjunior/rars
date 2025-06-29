@@ -250,6 +250,18 @@ fcvt.wu.d t1, f1         ; fcvt.wu.d RG1, RG2, dyn         ;#Convert unsigned in
 fcvt.s.d f1, f2          ; fcvt.s.d RG1, RG2, dyn          ;#Convert double to float: Assigned the value of f2 to f1
 fcvt.d.s f1, f2          ; fcvt.d.s RG1, RG2 , dyn         ;#Convert float to double: Assigned the value of f2 to f1
 
+# Posit instructions
+
+padd.s    pt1, pt2, pt3     ;padd.s    RG1, RG2, RG3, dyn;      #Posit ADD: assigns f1 to f2 + f3
+psub.s    pt1, pt2, pt3    ;psub.s    RG1, RG2, RG3, dyn;       #Posit Subtract: assigns f1 to f2 - f3
+pmul.s    pt1, pt2, pt3    ;pmul.s    RG1, RG2, RG3, dyn;       #Posit multiply: assigns f1 to f2 * f3
+pdiv.s    pt1, pt2, pt3     ;pdiv.s    RG1, RG2, RG3, dyn;      #Posit divide:   assigns f1 to f2 / f3
+pqadd.s   pt1, pt2         ;pqadd RG1,RG2 ;                     #Posit quire add : accumulate value of pt1 + pt2
+pqmul.s   pt1, pt2         ;pquml RG1,RG2 ;                     #Posit quire multiply : accumulate value of pt1 * pt2
+plw f1,-100               ;plw RG1, VL2(x0);                    #Load Word Coprocessor 1 : Set f1 to 32-bit value from effective memory word address
+psw f1,-100               ;psw RG1, VL2(x0);                    #Store Word Coprocessor 1 : Store 32-bit value from f1 to effective memory word address
+pmv.s pt1 ft1             ;pmv.s RG1 RG2   ;                    #Posit move: move float value from ft1 to pt1
+
 sext.b t1, t2 ; slli RG1, RG2, 24 ;srai RG1, RG1, 24 ;#Sign EXTend Byte: extract the low byte from t2 and sign extend it into t1
 sext.h t1, t2 ; slli RG1, RG2, 16 ;srai RG1, RG1, 16 ;#Sign EXTend Half: extract the low 16 bit from t2 and sign extend it into t1
 

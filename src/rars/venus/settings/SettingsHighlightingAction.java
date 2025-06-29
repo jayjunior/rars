@@ -365,6 +365,7 @@ public class SettingsHighlightingAction extends GuiAction {
         executePane.getRegistersWindow().refresh();
         executePane.getControlAndStatusWindow().refresh();
         executePane.getFloatingPointWindow().refresh();
+        executePane.getPositWindow().refresh();
         // If a successful assembly has occurred, the various panes will be populated with tables
         // and we want to apply the new settings.  If it has NOT occurred, there are no tables
         // in the Data and Text segment windows so we don't want to disturb them.

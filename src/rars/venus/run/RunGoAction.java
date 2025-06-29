@@ -139,7 +139,7 @@ public class RunGoAction extends GuiAction {
         executePane.getTextSegmentWindow().setCodeHighlighting(true);
         executePane.getTextSegmentWindow().highlightStepAtPC();
         executePane.getRegistersWindow().updateRegisters();
-        executePane.getFloatingPointWindow().updateRegisters();
+        executePane.getPositWindow().updateRegisters();
         executePane.getControlAndStatusWindow().updateRegisters();
         executePane.getDataSegmentWindow().updateValues();
         FileStatus.set(FileStatus.RUNNABLE);
@@ -157,6 +157,7 @@ public class RunGoAction extends GuiAction {
         // show final register and data segment values.
         executePane.getRegistersWindow().updateRegisters();
         executePane.getFloatingPointWindow().updateRegisters();
+        executePane.getPositWindow().updateRegisters();
         executePane.getControlAndStatusWindow().updateRegisters();
         executePane.getDataSegmentWindow().updateValues();
         FileStatus.set(FileStatus.TERMINATED);

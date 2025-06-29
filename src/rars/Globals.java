@@ -6,6 +6,7 @@ import rars.riscv.InstructionSet;
 import rars.riscv.SyscallNumberOverride;
 import rars.util.PropertiesFile;
 import rars.venus.VenusUI;
+import Posit.Posit;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -56,6 +57,19 @@ public class Globals {
      * The set of implemented instructions.
      **/
     public static InstructionSet instructionSet;
+
+    /**
+     * Posit global variables
+     */
+    private static int positNbit = 32;
+
+    private static int positEs = 2;
+
+    public static Posit positInstance = new Posit(positNbit,positEs);
+
+    public static String quireBitPattern = "";
+
+    public static String quireRoundedValue = "";
     /**
      * the program currently being worked with.  Used by GUI only, not command line.
      **/
@@ -158,6 +172,18 @@ public class Globals {
 
     public static Settings getSettings() {
         return settings;
+    }
+
+    public static void setPositNbit(int nbits){
+        positNbit = nbits;
+        positInstance = new Posit(positNbit,positEs);
+    }
+
+    public static void setPositEs(int es){
+        if(es > 5) es = 5;
+        else if(es < 0) es = 0;
+        positEs = es;
+        positInstance = new Posit(positNbit,positEs);
     }
 
     /**

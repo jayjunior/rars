@@ -386,7 +386,8 @@ public class Settings extends Observable {
     interface SystemColorProvider { Color getColor();}
     private SystemColorProvider[] systemColors;
 
-    private HashMap<Bool, Boolean> booleanSettingsValues;
+    private HashMap<Bool, Boolean>
+            booleanSettingsValues;
     private String[] stringSettingsValues;
     private String[] fontFamilySettingsValues;
     private String[] fontStyleSettingsValues;

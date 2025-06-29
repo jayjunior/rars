@@ -4,10 +4,7 @@ import rars.assembler.SymbolTable;
 import rars.assembler.Token;
 import rars.assembler.TokenList;
 import rars.assembler.TokenTypes;
-import rars.riscv.hardware.ControlAndStatusRegisterFile;
-import rars.riscv.hardware.FloatingPointRegisterFile;
-import rars.riscv.hardware.Register;
-import rars.riscv.hardware.RegisterFile;
+import rars.riscv.hardware.*;
 import rars.riscv.BasicInstruction;
 import rars.riscv.BasicInstructionFormat;
 import rars.riscv.Instruction;
@@ -232,6 +229,17 @@ public class ProgramStatement implements Comparable<ProgramStatement> {
                 if (registerNumber < 0) {
                     // should never happen; should be caught before now...
                     errors.add(new ErrorMessage(this.sourceProgram, token.getSourceLine(), token.getStartPos(), "invalid FPU register name"));
+                    return;
+                }
+                this.operands[this.numOperands++] = registerNumber;
+            } else if(tokenType == TokenTypes.P_REGISTER_NAME){
+                registerNumber = PositRegisterFile.getRegister(tokenValue).getNumber();
+                basicStatementElement = "p" + registerNumber;
+                basic += basicStatementElement;
+                basicStatementList.addString(basicStatementElement);
+                if (registerNumber < 0) {
+                    // should never happen; should be caught before now...
+                    errors.add(new ErrorMessage(this.sourceProgram, token.getSourceLine(), token.getStartPos(), "invalid Posit register name"));
                     return;
                 }
                 this.operands[this.numOperands++] = registerNumber;

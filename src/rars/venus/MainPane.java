@@ -3,6 +3,7 @@ package rars.venus;
 import rars.Globals;
 import rars.venus.registers.ControlAndStatusWindow;
 import rars.venus.registers.FloatingPointWindow;
+import rars.venus.registers.PositWindow;
 import rars.venus.registers.RegistersWindow;
 
 import javax.swing.*;
@@ -59,7 +60,7 @@ public class MainPane extends JTabbedPane {
      **/
 
     public MainPane(VenusUI appFrame, Editor editor, RegistersWindow regs,
-                    FloatingPointWindow cop1Regs, ControlAndStatusWindow cop0Regs) {
+                    FloatingPointWindow cop1Regs , ControlAndStatusWindow cop0Regs,PositWindow cop2Regs) {
         super();
         this.mainUI = appFrame;
 
@@ -68,7 +69,7 @@ public class MainPane extends JTabbedPane {
             BasicTabbedPaneUI ui = (BasicTabbedPaneUI) this.getUI();
         }
         editTabbedPane = new EditTabbedPane(appFrame, editor, this);
-        executeTab = new ExecutePane(appFrame, regs, cop1Regs, cop0Regs);
+        executeTab = new ExecutePane(appFrame, regs, cop1Regs, cop0Regs,cop2Regs);
         String editTabTitle = "Edit";
         String executeTabTitle = "Execute"; //"<html><center>&nbsp;<br>E<br>x<br>e<br>c<br>u<br>t<br>e<br>&nbsp;</center></html>";
         Icon editTabIcon = null;//new ImageIcon(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource(Globals.imagesPath+"Edit_tab.jpg")));

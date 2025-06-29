@@ -131,6 +131,7 @@ public class Program {
     public void setup(ArrayList<String> args, String STDIN){
         RegisterFile.resetRegisters();
         FloatingPointRegisterFile.resetRegisters();
+        PositRegisterFile.resetRegisters();
         ControlAndStatusRegisterFile.resetRegisters();
         InterruptController.reset();
         RegisterFile.initializeProgramCounter(startPC);
@@ -218,6 +219,9 @@ public class Program {
             r = FloatingPointRegisterFile.getRegister(name);
         }
         if(r == null){
+            r = PositRegisterFile.getRegister(name);
+        }
+        if(r == null){
             return ControlAndStatusRegisterFile.getValue(name);
         }else{
             return (int)r.getValue();
@@ -235,6 +239,9 @@ public class Program {
         Register r = RegisterFile.getRegister(name);
         if(r == null){
             r = FloatingPointRegisterFile.getRegister(name);
+        }
+        if(r == null){
+            r = PositRegisterFile.getRegister(name);
         }
         if(r == null){
             ControlAndStatusRegisterFile.updateRegister(name,value);

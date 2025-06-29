@@ -4,6 +4,7 @@ import rars.Globals;
 import rars.ProgramStatement;
 import rars.riscv.hardware.ControlAndStatusRegisterFile;
 import rars.riscv.hardware.FloatingPointRegisterFile;
+import rars.riscv.hardware.PositRegisterFile;
 import rars.riscv.hardware.RegisterFile;
 import rars.riscv.Instruction;
 
@@ -54,6 +55,7 @@ public class BackStepper {
         CONTROL_AND_STATUS_REGISTER_RESTORE,
         CONTROL_AND_STATUS_REGISTER_BACKDOOR,
         FLOATING_POINT_REGISTER_RESTORE,
+        POSIT_REGISTER_RESTORE,
         DO_NOTHING
     }
 
@@ -156,6 +158,9 @@ public class BackStepper {
                             break;
                         case FLOATING_POINT_REGISTER_RESTORE:
                             FloatingPointRegisterFile.updateRegisterLong(step.param1,step.param2);
+                            break;
+                        case POSIT_REGISTER_RESTORE:
+                            PositRegisterFile.updateRegister(step.param1,(int) step.param2);
                             break;
                         case CONTROL_AND_STATUS_REGISTER_RESTORE:
                             ControlAndStatusRegisterFile.updateRegister(step.param1,step.param2);
@@ -313,6 +318,19 @@ public class BackStepper {
      */
     public long addFloatingPointRestore(int register, long value) {
         backSteps.push(Action.FLOATING_POINT_REGISTER_RESTORE, pc(), register, value);
+        return value;
+    }
+    /**
+     * Add a new "back step" (the undo action) to the stack.  The action here
+     * is to restore a posit point register value.
+     *
+     * @param register The affected register number.
+     * @param value    The "restore" value to be stored there.
+     * @return the argument value
+     */
+
+    public long addPositRestore(int register, long value) {
+        backSteps.push(Action.POSIT_REGISTER_RESTORE, pc(), register, value);
         return value;
     }
 
